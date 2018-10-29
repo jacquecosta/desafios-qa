@@ -1,0 +1,44 @@
+package steps;
+
+import cucumber.api.PendingException;
+import cucumber.api.java.pt.Entao;
+import cucumber.api.java.pt.Quando;
+import io.restassured.response.Response;
+import io.restassured.response.ValidatableResponse;
+import io.restassured.specification.RequestSpecification;
+
+public class APIConsultaRelatoriosInconsistenteTestSteps {
+	
+	private Response response;
+	private ValidatableResponse json;
+	private RequestSpecification request;
+    private String ENDPOINT_POST_RELATORIOS = "https://api-v2.idwall.co/relatorios";
+    private String ENDPOINT_GET_RELATORIOS = "https://api-v2.idwall.co/relatorios/25f1d05b-139d-4b30-bc54-5f0edd13b883";
+    private String TOKEN = "9a5c457e-d004-46d2-ad0b-b3f015af0c58";
+    private String TYPE = "application/json";
+	
+	@Quando("^A requisicao for realizada informando o \"([^\"]*)\" para o cpf_data_de_nascimento diferente do cadastrado$")
+	public void a_requisicao_for_realizada_informando_o_para_o_cpf_data_de_nascimento_diferente_do_cadastrado(String arg1) throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new PendingException();
+	}
+
+	@Entao("^A API deve retornar um numero$")
+	public void a_API_deve_retornar_um_numero() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new PendingException();
+	}
+
+	@E("^\"([^\"]*)\"$")
+	public void (String arg1) throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new PendingException();
+	}
+
+	@E("^um status code (\\d+)$")
+	public void um_status_code(int arg1) throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new PendingException();
+	}
+
+}

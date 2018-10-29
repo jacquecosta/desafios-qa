@@ -1,0 +1,8 @@
+Feature: Eu como usuario
+				 Quero conseguir utilizar a API da IDWALL
+
+  Scenario: Parametros nao foram informados
+    Given A API de relatorio
+    When A requisicao for realizada sem informar todos os parametros
+    Then A API deve retornar um status code 400
+    And uma mensagem de erro tratada

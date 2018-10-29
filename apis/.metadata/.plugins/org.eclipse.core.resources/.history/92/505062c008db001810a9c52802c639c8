@@ -1,0 +1,85 @@
+package steps;
+
+import org.junit.Assert;
+
+import cucumber.api.PendingException;
+import cucumber.api.java.pt.E;
+import cucumber.api.java.pt.Entao;
+import cucumber.api.java.pt.Quando;
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+import io.restassured.response.Response;
+import io.restassured.response.ValidatableResponse;
+import io.restassured.specification.RequestSpecification;
+
+public class APIConsultaRelatoriosInconsistenteTestSteps {
+	
+	private Response responsePost;
+	private Response responseGet;
+	private ValidatableResponse json;
+	private RequestSpecification request;
+    private String ENDPOINT_POST_RELATORIOS = "https://api-v2.idwall.co/relatorios";
+    private String ENDPOINT_GET_RELATORIOS = "http://api-v2.idwall.co/relatorios/{protocol_number}";
+    private String TOKEN = "9a5c457e-d004-46d2-ad0b-b3f015af0c58";
+    private String TYPE = "application/json";
+	
+    @Quando("^A requisicao for realizada informando o \"([^\"]*)\" para o \"([^\"]*)\" diferente do cadastrado$")
+    public void a_requisicao_for_realizada_informando_o_para_o_diferente_do_cadastrado(String valor, String campo) throws Throwable {
+    	request = RestAssured.with().contentType(TYPE).header("Authorization", TOKEN).accept(TYPE);
+    	
+    	if (campo.equals("cpf_data_de_nascimento"))
+    	{
+    		responsePost =  request
+ 				   .body("{\r\n \"matriz\": \"consultaPessoaDefault\",\r\n    \"parametros\": {\r\n        \"cpf_data_de_nascimento\": \"28/09/1988\",\r\n        \"cpf_nome\": \"Gabriel Oliveira\",\r\n        \"cpf_numero\": \"07614917677\"\r\n    }\r\n    \r\n}")
+ 				   .when()
+ 				   .post(ENDPOINT_POST_RELATORIOS)
+ 				   .then().contentType(ContentType.JSON).extract().response();
+    		
+    		System.out.println("Response Post " + responsePost);
+    	}
+    	
+    }
+
+
+	@Entao("^A API deve retornar um numero$")
+	public void a_API_deve_retornar_um_numero() throws Throwable {
+		String numeroRetornado = responsePost.jsonPath().getString("numero");
+		
+		System.out.println("Numero " + numeroRetornado);
+	
+		responseGet =  request.pathParam("protocol_number", numeroRetornado).when()
+				   .get(http://api-v2.idwall.co/relatorios/{protocol_number})
+				   .then().contentType(ContentType.JSON).extract().response();
+		
+	}
+
+	@E("^status \"([^\"]*)\"$")
+	public void status(String status) throws Throwable {
+		String statusRetornado = responseGet.jsonPath().getString("status");
+		Assert.assertEquals(status, statusRetornado);
+	}
+
+	@E("^o nome \"([^\"]*)\"$")
+	public void o_nome(String nome) throws Throwable {
+		String nomeRetornado = responseGet.jsonPath().getString("nome");
+		Assert.assertEquals(nome, nomeRetornado);
+	}
+
+	@E("^a mensagem \"([^\"]*)\"$")
+	public void a_mensagem(String msg) throws Throwable {
+		String msgRetornado = responseGet.jsonPath().getString("mensagem");
+		Assert.assertEquals(msg, msgRetornado);
+	}
+
+	@E("^o resultado \"([^\"]*)\"$")
+	public void o_resultado(String resultado) throws Throwable {
+	   System.out.print("Teste");   
+	}
+
+
+	@E("^um status code (\\d+)$")
+	public void um_status_code(int statusCode) throws Throwable {
+		 System.out.print("Teste");   
+	}
+
+}

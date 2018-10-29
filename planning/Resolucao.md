@@ -1,0 +1,10 @@
+
+# **Desafio QA - Solução**
+
+##  Planning
+
+Na minha visão de um time ágil uma das formas de se obter melhor resultado com o time de qualidade é seguir a forma de trabalhar levando em consideração o Agile Testing, ou seja, ter uma maior responsabilidade do time com o que está sendo entrege, como está sendo feito e o que pode ser melhorado dentro do fluxo de trabalho.
+Em relação a ferramentas, considero que isso varie muito de cada time, deve-se utilizar a ferramenta que se adeque mais ao que está sendo utilizado, por exemplo, as vezes não faz muito sentido automatizar testes em uma linguagem que é diferente das utilizadas pela equipe de desenvolvimento / ou do produto, pois, utilizando a mesma linguagem fica mais fácil de tirar dúvidas e verificar melhorias e padrões de codificação, fora isso, a adoção de ferramentas que ajudem ao time a entender melhor o que está sendo trabalhado são sempre bem-vindas, como por exemplo a adoção do framework cucumber para esclarecimento de um "mínimo" de negócio que devem estar automatizados, sendo que a escrita do Gherkin pode ser realizado por um PO e a sua implementação por um QA ou Dev.
+Em relação as abordagens, considero que *refinements* com todos os envolvidos do time são formas de se obter uma melhor solução e evitar problemas futuros, pois podemos adiantar diversos problemas e também pensar em melhores estretégias de planejar os nossos testes (manuais e automatizados). Assim como a prática de dev-box testing (https://www.youtube.com/watch?v=AQ7LQ31NXj4), que pode auxiliar o time na prevenção de bugs em cada entregável.
+Além disso, considero que analisar se o que está sendo feito pelo time está sendo efetivo é importante também, com isso me refiro a métricas de qualidade, a entender se o que estamos entregando está de fato agregando valor ao cliente e não está causando dor de cabeça (como por exemplo entender por que os bugs acontecem e quais as melhores formas de evitar que erros continuem a acontecer).
+Entendo que cada time possui uma maneira de trabalhar, mas antes de tudo, é necessário solidificar que a importância da entrega, a importância da qualidade é de todo mundo. 

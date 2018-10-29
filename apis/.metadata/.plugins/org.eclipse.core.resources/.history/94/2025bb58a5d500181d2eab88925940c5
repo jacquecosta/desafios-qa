@@ -1,0 +1,53 @@
+package steps;
+
+import cucumber.api.PendingException;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+
+import static io.restassured.RestAssured.when;
+import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.Matchers.equalTo;
+
+import io.restassured.response.Response;
+import io.restassured.response.ValidatableResponse;
+import io.restassured.specification.RequestSpecification;
+import junit.framework.Assert;
+
+public class CenariosConhecidosSteps {
+	
+	private Response response;
+	private ValidatableResponse json;
+	private RequestSpecification request;
+    private String ENDPOINT_POST_RELATORIOS = "https://api-v2.idwall.co/relatorios";
+    private String TOKEN = "9a5c457e-d004-46d2-ad0b-b3f015af0c58";
+    private String TYPE = "application/json";
+
+	@Given("^A API de relatorio$")
+	public void a_API_de_relatorio() {
+		//request = request.given().header("Authorization", TOKEN).contentType(TYPE);
+		request = given().param("q", "isbn:" + isbn);
+		System.out.print(request);
+	}
+
+	@When("^A requisicao for realizada sem informar todos os parametros$")
+	public void a_requisicao_for_realizada_sem_informar_todos_os_parametros() throws Throwable {
+		response = request.body("{\r\n    \"matriz\": \"consultaPessoaDefault\",\r\n    \"parametros\": {\r\n        \"cpf_data_de_nascimento\": \"\",\r\n        \"cpf_nome\": \"\",\r\n        \"cpf_numero\": \"\"\r\n    }\r\n}").when().post("");
+		System.out.println("response: " + response.prettyPrint());
+	}
+
+	@Then("^A API deve retornar um status code (\\d+)$")
+	public void a_API_deve_retornar_um_status_code(int statusCode) throws Throwable {
+		json = response.then().statusCode(statusCode);
+		
+		//Assert.assertEquals(json, statusCode);
+	}
+
+	@And("^uma mensagem de erro tratada$")
+	public void uma_mensagem_de_erro_tratada() throws Throwable {
+		json.assertThat().body("error", equalTo("Bad Request"));
+		
+	}
+
+}

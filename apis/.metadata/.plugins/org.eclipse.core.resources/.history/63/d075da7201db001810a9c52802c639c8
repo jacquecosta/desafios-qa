@@ -1,0 +1,11 @@
+#language: pt
+
+Funcionalidade: Eu como usuario
+				 Quero conseguir utilizar a API da IDWALL
+
+  Cenario: Parametros nao foram informados
+    Dado A API de relatorio
+    Quando A requisicao for realizada sem informar todos os parametros
+    Entao A API deve retornar um erro de "Bad Request" 
+    E A API deve retornar um status code 400
+    E uma mensagem de erro tratada "É necessário enviar ao menos um parâmetro para criação do relatório."

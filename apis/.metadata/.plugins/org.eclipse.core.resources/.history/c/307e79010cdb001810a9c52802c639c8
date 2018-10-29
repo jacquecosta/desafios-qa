@@ -1,0 +1,35 @@
+#language: pt
+
+Funcionalidade: Eu como usuario
+				 Quero conseguir utilizar a API da IDWALL
+				 
+Contexto: Validações de regras da API de relatórios
+    Dado A API de relatorio
+
+  Cenario: Parametros nao foram informados
+    Quando A requisicao for realizada sem informar todos os parametros
+    Entao A API deve retornar um erro de "Bad Request" 
+    E A API deve retornar um status code 400
+    E uma mensagem de erro tratada "É necessário enviar ao menos um parâmetro para criação do relatório."
+    
+    
+   Esquema do Cenario: Dados inconsistentes
+   	Quando A requisicao for realizada informando o <valor> para o <campo> diferente do cadastrado
+   	Entao A API deve retornar um numero 
+   	E status <status> 
+   	E o nome <nome> 
+   	E a mensagem <mensagem> 
+   	E o resultado <resultado>
+   	E um status code <code>
+   	
+   	Exemplos:
+   	|valor	           |campo									  |status     |nome										|mensagem																																																																														 |resultado|code|
+   	|"28/09/1988"      |"cpf_data_de_nascimento"|"CONCLUIDO"|"consultaPessoaDefault"|"Inválido. [ERROR] Não foi possível validar: Data de nascimento informada está divergente da constante na base de dados da Secretaria da Receita Federal do Brasil."|"INVALID"|200 |
+   	|"Gabriel Oliveira"|"cpf_nome"							|"CONCLUIDO"|"consultaPessoaDefault"|"Inválido. [INVALID] Nome diferente do cadastrado na Receita Federal."																																															 |"INVALID"|200 |
+   	
+   	
+    Cenario: Validar dados reais
+    Quando A requisicao for realizada informando uma pessoa real
+    Entao A API deve retornar o status "CONCLUIDO" 
+    E o resultado como "VALID"
+    E uma mensagem de erro tratada "É necessário enviar ao menos um parâmetro para criação do relatório." 	
